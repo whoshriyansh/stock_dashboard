@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "../components/Card";
 import { mockMarketMoversData } from "../constants/mock";
 import Portfolio from "../components/Portfolio";
 import StockProfile from "../components/StockProfile";
 import StockSymbolTable from "../components/StockSymbol";
 import Chart from "../components/Chart";
+import Overlays from "../components/Overlays";
 
 const Dashboard = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const closeModal = () => setIsModalOpen(false);
+
   // Extract only necessary values Market mover Cards
   const filteredData = mockMarketMoversData.values.map(
     ({ symbol, last, percent_change }) => ({
@@ -17,22 +22,14 @@ const Dashboard = () => {
   );
 
   return (
-    <div
-      className={`h-screen grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 grid-rows-8 md:grid-rows-7 xl:grid-rows-8 auto-rows-fr gap-2`}
-    >
-      <div className="col-span-1 md:col-span-2 xl:col-span-3 row-span-1 flex justify-start items-center">
-        <Portfolio data={filteredData} />
-      </div>
+    <div className={`w-full flex flex-col gap-4 px-4 py-2`}>
+      <Portfolio data={filteredData} />
+      <Chart />
+      <StockProfile />
+      <StockSymbolTable />
+      {/* <Overlays isModalOpen={isModalOpen} closeModal={closeModal} />
 
-      <div className="md:col-span-2 row-span-5">
-        <Chart />
-      </div>
-      <div className="row-span-2 xl:row-span-5 col-span-2 lg:col-span-1">
-        <StockProfile />
-      </div>
-      <div className="row-span-1 xl:row-span-3 col-span-2 xl:col-span-3">
-        <StockSymbolTable />
-      </div>
+      <button onClick={() => setIsModalOpen(true)}>Toggle Modal</button> */}
     </div>
   );
 };

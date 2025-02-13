@@ -6,9 +6,9 @@ import Card from "./Card";
 const companies = [
   { symbol: "AAPL", name: "Apple", logo: "simple-icons:apple" },
   { symbol: "MSFT", name: "Microsoft", logo: "logos:microsoft-icon" },
-  { symbol: "GOOGL", name: "Google", logo: "logos:google-icon" },
-  { symbol: "AMZN", name: "Amazon", logo: "fontisto:amazon" },
-  { symbol: "META", name: "Meta", logo: "logos:meta-icon" },
+  { symbol: "GOOGL", name: "logos:google-icon" },
+  { symbol: "AMZN", name: "fontisto:amazon" },
+  { symbol: "META", name: "logos:meta-icon" },
 ];
 
 const intervals = ["1min", "5min", "15min", "30min", "1h"];
@@ -24,7 +24,11 @@ const Chart = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://api.twelvedata.com/time_series?symbol=${selectedCompany.symbol}&interval=${selectedInterval}&apikey=0ed240b9ac774eb0b6935f3886a5896f`
+          `https://api.twelvedata.com/time_series?symbol=${
+            selectedCompany.symbol
+          }&interval=${selectedInterval}&apikey=${
+            import.meta.env.VITE_API_KEY_TWELVE
+          }`
         );
         const result = await response.json();
         if (result.values) {
@@ -57,7 +61,10 @@ const Chart = () => {
     const chart = createChart(chartRef.current, {
       width: chartRef.current.clientWidth || 800,
       height: 350,
-      layout: { background: { color: "#1e1e1e" }, textColor: "#fff" },
+      layout: {
+        background: { color: "transparent" },
+        textColor: "var(--text-primary)",
+      },
     });
 
     const candlestickSeries = chart.addCandlestickSeries();
@@ -67,72 +74,74 @@ const Chart = () => {
   }, [data]);
 
   return (
-    <Card>
-      <div className="flex justify-between items-center border-b-1 border-secondary">
-        <div className="flex items-center gap-2">
-          <Icon icon={selectedCompany.logo} className="text-4xl" />
-          <h3 className="text-2xl font-medium">{selectedCompany.name}</h3>
+    <Card className="p-4 bg-base-200 shadow-lg rounded-xl">
+      {/* Header Section */}
+      <div className="flex justify-between items-center border-b border-secondary pb-3">
+        <div className="flex items-center gap-3">
+          <Icon icon={selectedCompany.logo} className="text-5xl text-primary" />
+          <h3 className="text-xl font-semibold text-base-content">
+            {selectedCompany.name}
+          </h3>
         </div>
-        <div className="flex flex-col items-end">
-          <h3>
-            Last close:{" "}
-            {companyInfo && (
-              <span
-                style={{
-                  color: companyInfo.change >= 0 ? "green" : "red",
-                }}
-              >
-                $ {companyInfo.lastClose.toFixed(2)}
-              </span>
-            )}
-          </h3>
-          <h3>
-            Percentage Change:{" "}
-            {companyInfo && (
-              <span
-                style={{
-                  color: companyInfo.change >= 0 ? "green" : "red",
-                }}
-              >
-                {companyInfo.change.toFixed(2)}%
-              </span>
-            )}
-          </h3>
+        <div className="text-right text-sm text-text-base-content">
+          {companyInfo ? (
+            <>
+              <p>
+                Last Close:{" "}
+                <span
+                  className={
+                    companyInfo.change >= 0 ? "text-success" : "text-error"
+                  }
+                >
+                  ${companyInfo.lastClose.toFixed(2)}
+                </span>
+              </p>
+              <p>
+                Change:{" "}
+                <span
+                  className={
+                    companyInfo.change >= 0 ? "text-success" : "text-error"
+                  }
+                >
+                  {companyInfo.change.toFixed(2)}%
+                </span>
+              </p>
+            </>
+          ) : (
+            <p>Loading...</p>
+          )}
         </div>
       </div>
 
-      <div className="flex justify-between mt-2">
+      {/* Controls Section */}
+      <div className="flex flex-col md:flex-row justify-between items-center mt-4 gap-3">
         {/* Company Select Dropdown */}
-        <div>
-          <select
-            className="border-1 border-white/80 px-3 py-2 rounded-full bg-primary text-white text-xs outline-none focus:ring-2 focus:ring-gray-500 "
-            onChange={(e) => {
-              const company = companies.find(
-                (c) => c.symbol === e.target.value
-              );
-              setSelectedCompany(company);
-            }}
-            value={selectedCompany.symbol}
-          >
-            {companies.map((company) => (
-              <option
-                key={company.symbol}
-                value={company.symbol}
-                className="bg-transparent text-white hover:bg-gray-700 cursor-pointer"
-              >
-                {company.name}
-              </option>
-            ))}
-          </select>
-        </div>
+        <select
+          className="select select-bordered w-full md:w-52 text-sm bg-primary text-base-content"
+          onChange={(e) => {
+            const company = companies.find((c) => c.symbol === e.target.value);
+            setSelectedCompany(company);
+          }}
+          value={selectedCompany.symbol}
+        >
+          {companies.map((company) => (
+            <option key={company.symbol} value={company.symbol}>
+              {company.name}
+            </option>
+          ))}
+        </select>
 
         {/* Interval Buttons */}
-        <div className="flex gap-2 items-center">
+        <div className="flex flex-wrap gap-2">
           {intervals.map((interval) => (
             <button
               key={interval}
               onClick={() => setSelectedInterval(interval)}
-              className="bg-transparent border border-white/60 rounded-xl px-3 py-1 text-xs hover:bg-white hover:text-primary duration-200"
+              className={`btn btn-sm ${
+                selectedInterval === interval
+                  ? "btn-primary"
+                  : "btn-outline btn-primary"
+              }`}
             >
               {interval}
             </button>
@@ -141,11 +150,9 @@ const Chart = () => {
       </div>
 
       {/* Chart Container */}
-      <div
-        ref={chartRef}
-        className="mt-5"
-        style={{ width: "100%", height: "300px" }}
-      />
+      <div className="relative mt-5 w-full h-[350px] overflow-hidden rounded-lg bg-base-100 shadow-md">
+        <div ref={chartRef} className="absolute inset-0" />
+      </div>
     </Card>
   );
 };

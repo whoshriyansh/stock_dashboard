@@ -28,7 +28,7 @@ const famousCompanies = [
 const StockDetailsTable = () => {
   const [stocks, setStocks] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const rowsPerPage = 3;
+  const rowsPerPage = 7;
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -53,7 +53,7 @@ const StockDetailsTable = () => {
     <Card>
       <h2 className="text-xl font-semibold mb-4">Portfolio</h2>
       <div className="overflow-x-auto">
-        <table className="min-w-full">
+        <table className="table table-zebra w-full">
           <thead>
             <tr className="text-sm">
               <th className="py-3 px-4 text-left">Symbol</th>
@@ -68,10 +68,10 @@ const StockDetailsTable = () => {
             {currentStocks.map((stock) => (
               <tr key={stock.ticker} className="text-sm">
                 <td className="py-3 px-4">
-                  <span className="flex gap-4 items-center">
+                  <span className="flex gap-4 items-center text-base-content">
                     <img src={stock.logo} alt="" className="h-8" />
                     <span>{stock.ticker}</span>
-                    <span className="font-extralight text-white/80">
+                    <span className="font-extralight text-text-base-content">
                       {stock.name}
                     </span>
                   </span>
@@ -87,7 +87,7 @@ const StockDetailsTable = () => {
                     href={stock.weburl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-blue-500   border-white/60 rounded-xl px-3 py-1 text-xs hover:bg-white hover:text-primary duration-200"
+                    className="btn btn-sm btn-primary"
                   >
                     Website
                   </a>
@@ -101,7 +101,7 @@ const StockDetailsTable = () => {
       {/* Pagination Controls */}
       <div className="flex justify-end items-center space-x-4">
         <button
-          className={`border border-white/60 rounded-xl px-3 py-1 text-xs hover:bg-white hover:text-primary duration-200 ${
+          className={`btn btn-outline btn-sm ${
             currentPage === 1
               ? "bg-transparent cursor-not-allowed"
               : "bg-white text-secondary"
@@ -113,7 +113,7 @@ const StockDetailsTable = () => {
         </button>
         <span className="text-gray-700">{`Page ${currentPage} of ${totalPages}`}</span>
         <button
-          className={`border border-white/60 rounded-xl px-3 py-1 text-xs hover:bg-white hover:text-primary duration-200 ${
+          className={`btn btn-outline btn-sm ${
             currentPage === totalPages
               ? "bg-transparent cursor-not-allowed"
               : "bg-white text-secondary"

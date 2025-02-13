@@ -32,25 +32,25 @@ const StockDetails = ({ stockSymbol }) => {
       </div>
 
       <div className="flex flex-col space-y-4 mt-2">
-        <p className="text-sm flex justify-between border-b-1 border-secondary py-1">
+        <p className="text-sm flex justify-between border-b-1 border-primary/50 py-1">
           <strong>Country:</strong> {stockData.country}
         </p>
-        <p className="text-sm flex justify-between border-b-1 border-secondary py-1">
+        <p className="text-sm flex justify-between border-b-1 border-primary/50 py-1">
           <strong>Currency:</strong> {stockData.currency}
         </p>
-        <p className="text-sm flex justify-between border-b-1 border-secondary py-1">
+        <p className="text-sm flex justify-between border-b-1 border-primary/50 py-1">
           <strong>Phone No:</strong> {stockData.phone}
         </p>
-        <p className="text-sm flex justify-between border-b-1 border-secondary py-1">
+        <p className="text-sm flex justify-between border-b-1 border-primary/50 py-1">
           <strong>Ticker:</strong> {stockData.ticker}
         </p>
-        <p className="text-sm flex justify-between border-b-1 border-secondary py-1">
+        <p className="text-sm flex justify-between border-b-1 border-primary/50 py-1">
           <strong>Exchange:</strong> {stockData.exchange}
         </p>
-        <p className="text-sm flex justify-between border-b-1 border-secondary py-1">
+        <p className="text-sm flex justify-between border-b-1 border-primary/50 py-1">
           <strong>Market Cap:</strong> ${stockData.marketCapitalization}B
         </p>
-        <p className="text-sm flex justify-between border-b-1 border-secondary py-1">
+        <p className="text-sm flex justify-between border-b-1 border-primary/50 py-1">
           <strong>IPO Date:</strong> {stockData.ipo}
         </p>
         <div className="flex justify-center">
@@ -58,7 +58,7 @@ const StockDetails = ({ stockSymbol }) => {
             href={stockData.weburl}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-transparent border border-white/60 rounded-xl px-3 py-1 text-xs hover:bg-white hover:text-primary duration-200"
+            className="btn btn-primary btn-sm rounded-lg"
           >
             Visit Company Website
           </a>

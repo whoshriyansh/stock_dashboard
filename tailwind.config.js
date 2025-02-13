@@ -3,16 +3,8 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      colors: {
-        primary: "#141414",
-        secondary: "#000000",
-        primary_blue: "#0958D9",
-        primary_gray: "#4D4D4D",
-        white: "white",
-        none: "none",
-      },
       borderWidth: {
-        1: "1px",
+        1: "0.5px",
       },
       gridTemplateRows: {
         7: "repeat(7, minmax(0, 1fr))",
@@ -20,5 +12,30 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: [
+      "light",
+      "dark",
+      "cupcake",
+      "bumblebee",
+      "emerald",
+      "corporate",
+      "synthwave",
+      "retro",
+      "cyberpunk",
+      "valentine",
+      "halloween",
+      "garden",
+      "forest",
+      "aqua",
+      "lofi",
+      "pastel",
+      "fantasy",
+      "wireframe",
+      "black",
+      "luxury",
+      "dracula",
+    ],
+  },
 };

@@ -6,140 +6,86 @@ import {
   SquaresFour,
   User,
   UsersThree,
+  X,
 } from "@phosphor-icons/react";
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const Siderbar = () => {
+const navItems = [
+  {
+    name: "Dashboard",
+    to: "/",
+    icon: <BookmarkSimple size={24} color="#4D4D4D" />,
+  },
+  {
+    name: "Orders",
+    to: "#",
+    icon: <EnvelopeSimple size={24} color="#4D4D4D" />,
+  },
+  {
+    name: "Customers",
+    to: "#",
+    icon: <UsersThree size={24} color="#4D4D4D" />,
+  },
+  {
+    name: "Invoice",
+    to: "#",
+    icon: <SquaresFour size={24} color="#4D4D4D" />,
+  },
+  {
+    name: "Settings",
+    to: "#",
+    icon: <User size={24} color="#4D4D4D" />,
+  },
+  {
+    name: "Charts",
+    to: "#",
+    icon: <ChartBar size={24} color="#4D4D4D" />,
+  },
+];
+
+const Siderbar = ({ isOpen, closeSidebar }) => {
   return (
-    <nav className="w-60 bg-primary h-full p-4">
-      <div className="flex items-center justify-start text-2xl font-semibold gap-2 mb-6">
-        <span>
-          <Diamond size={32} weight="bold" className="text-orange-500" />
-        </span>
-        Stockin
+    <aside
+      className={`bg-base-200 text-base-content h-screen p-4 fixed lg:relative w-60 transition-transform duration-300 z-50 
+      ${isOpen ? "translate-x-0" : "-translate-x-64"} lg:translate-x-0`}
+    >
+      {/* Sidebar Header */}
+      <div className="flex items-center justify-between text-2xl font-semibold mb-6">
+        <div className="flex items-center gap-2">
+          <Diamond size={32} weight="bold" className="text-primary" />
+          Stockin
+        </div>
+        <button onClick={closeSidebar} className="lg:hidden">
+          <X size={24} />
+        </button>
       </div>
+
+      {/* Sidebar Navigation */}
       <ul className="space-y-4">
-        <li>
-          <NavLink
-            className="flex items-center justify-start gap-1 p-2 hover:bg-secondary/10 hover:rounded-md  font-medium"
-            to="/"
-            style={({ isActive }) => {
-              return isActive
-                ? { backgroundColor: "#000", border: 2, borderRadius: 5 }
-                : {};
-            }}
-          >
-            <span>
-              <SquaresFour size={24} color="#4D4D4D" />
-            </span>
-            Dashboard
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            className="flex items-center justify-start gap-1 p-2 hover:bg-secondary/10 hover:rounded-md  font-medium"
-            to="/stock"
-            style={({ isActive }) => {
-              return isActive
-                ? { backgroundColor: "#000", border: 2, borderRadius: 5 }
-                : {};
-            }}
-          >
-            <span>
-              <ChartBar size={24} color="#4D4D4D" />
-            </span>
-            Stocks List
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            className="flex items-center justify-start gap-1 p-2 hover:bg-secondary/10 hover:rounded-md  font-medium"
-            to="/settings"
-            style={({ isActive }) => {
-              return isActive
-                ? { backgroundColor: "#000", border: 2, borderRadius: 5 }
-                : {};
-            }}
-          >
-            <span>
-              <BookmarkSimple size={24} color="#4D4D4D" />
-            </span>
-            Market Movers
-          </NavLink>
-        </li>
+        {navItems.map((item) => (
+          <li key={item.name}>
+            <NavLink
+              className="flex items-center justify-start gap-1 p-2 rounded-lg transition hover:bg-primary hover:text-white"
+              to={item.to}
+              onClick={closeSidebar}
+              style={({ isActive }) =>
+                isActive
+                  ? {
+                      backgroundColor: "hsl(var(--p))",
+                      color: {},
+                      borderRadius: 5,
+                    }
+                  : {}
+              }
+            >
+              <span>{item.icon}</span>
+              {item.name}
+            </NavLink>
+          </li>
+        ))}
       </ul>
-      {/* SECOND MENU  */}
-      <div className="mb-3 mt-5">
-        <p className="text-primary_gray font-normal">My Account</p>
-      </div>
-      <ul className="space-y-4">
-        <li>
-          <NavLink
-            className="flex items-center justify-start gap-1 p-2 hover:bg-secondary/10 hover:rounded-md  font-medium"
-            to="/"
-            style={({ isActive }) => {
-              return isActive
-                ? { backgroundColor: "#000", border: 2, borderRadius: 5 }
-                : {};
-            }}
-          >
-            <span>
-              <UsersThree size={24} color="#4D4D4D" />
-            </span>
-            My Linkedin
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            className="flex items-center justify-start gap-1 p-2 hover:bg-secondary/10 hover:rounded-md  font-medium"
-            to="/stock"
-            style={({ isActive }) => {
-              return isActive
-                ? { backgroundColor: "#000", border: 2, borderRadius: 5 }
-                : {};
-            }}
-          >
-            <span>
-              <User size={24} color="#4D4D4D" />
-            </span>
-            Profile
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            className="flex items-center justify-start gap-1 p-2 hover:bg-secondary/10 hover:rounded-md  font-medium"
-            to="/settings"
-            style={({ isActive }) => {
-              return isActive
-                ? { backgroundColor: "#000", border: 2, borderRadius: 5 }
-                : {};
-            }}
-          >
-            <span>
-              <EnvelopeSimple size={24} color="#4D4D4D" />
-            </span>
-            Contact Us
-          </NavLink>
-        </li>
-        {/* <li>
-          <NavLink
-            className="flex items-center justify-start gap-1 p-2 hover:bg-secondary/10 hover:rounded-md  font-medium"
-            to="/settings"
-            style={({ isActive }) => {
-              return isActive
-                ? { backgroundColor: "#000", border: 2, borderRadius: 5 }
-                : {};
-            }}
-          >
-            <span>
-              <SignOut size={24} color="#4D4D4D" />
-            </span>
-            Logout
-          </NavLink>
-        </li> */}
-      </ul>
-    </nav>
+    </aside>
   );
 };
 

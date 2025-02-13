@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { searchSymbol } from "../service/stock-api";
 import SearchResults from "./SearchResults";
-import { Icon } from "@iconify/react/dist/iconify.js";
+import { Icon } from "@iconify/react";
 
 const Search = ({ onStockSelect }) => {
   const [input, setInput] = useState("");
@@ -31,32 +31,45 @@ const Search = ({ onStockSelect }) => {
   };
 
   return (
-    <div className="flex items-center rounded-md relative z-50 bg-secondary">
-      <button
-        onClick={updateBestMatches}
-        className="h-8 w-8 rounded-md flex justify-center items-center m-1 p-1 transition duration-300 hover:ring-1 ring-primary_gray"
-      >
-        <Icon icon="tabler:search" width="24" height="24" />
-      </button>
-      <input
-        type="text"
-        value={input}
-        className="w-full px-4 py-2 focus:outline-none rounded-full bg-transparent"
-        placeholder="Search stock..."
-        onChange={(e) => setInput(e.target.value)}
-        onKeyPress={(e) => e.key === "Enter" && updateBestMatches()}
-      />
-      {input && (
-        <button onClick={clear} className="px-2">
-          <Icon icon="akar-icons:cross" className="text-sm" />
+    <div className="relative w-full">
+      <div className="flex items-center bg-base-100 rounded-full shadow-md">
+        {/* Search Button */}
+        <button
+          onClick={updateBestMatches}
+          className="btn btn-ghost btn-circle hover:bg-base-300"
+        >
+          <Icon icon="tabler:search" width="20" height="20" />
         </button>
-      )}
 
-      {bestMatches.length > 0 && (
-        <SearchResults
-          results={bestMatches}
-          onStockSelect={handleStockSelect}
+        {/* Input Field */}
+        <input
+          type="text"
+          value={input}
+          className="input w-full bg-transparent rounded-full px-2 focus:outline-none focus:border-none text-base-content"
+          placeholder="Search stock..."
+          onChange={(e) => setInput(e.target.value)}
+          onKeyPress={(e) => e.key === "Enter" && updateBestMatches()}
         />
+
+        {/* Clear Button */}
+        {input && (
+          <button
+            onClick={clear}
+            className="btn btn-ghost btn-circle hover:bg-base-300"
+          >
+            <Icon icon="akar-icons:cross" width="16" height="16" />
+          </button>
+        )}
+      </div>
+
+      {/* Search Results Dropdown */}
+      {bestMatches.length > 0 && (
+        <div className="absolute left-0 w-full mt-2 z-50">
+          <SearchResults
+            results={bestMatches}
+            onStockSelect={handleStockSelect}
+          />
+        </div>
       )}
     </div>
   );

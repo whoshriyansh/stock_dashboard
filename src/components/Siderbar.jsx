@@ -2,7 +2,7 @@ import {
   BookmarkSimple,
   ChartBar,
   Diamond,
-  EnvelopeSimple,
+  DiamondsFour,
   SquaresFour,
   User,
   UsersThree,
@@ -18,9 +18,9 @@ const navItems = [
     icon: <BookmarkSimple size={24} color="#4D4D4D" />,
   },
   {
-    name: "Orders",
-    to: "#",
-    icon: <EnvelopeSimple size={24} color="#4D4D4D" />,
+    name: "Modals",
+    to: "/modals",
+    icon: <DiamondsFour size={24} color="#4D4D4D" />,
   },
   {
     name: "Customers",

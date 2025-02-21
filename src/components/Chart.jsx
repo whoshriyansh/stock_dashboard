@@ -1,14 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import { createChart } from "lightweight-charts";
 import { Icon } from "@iconify/react";
-import Card from "./Card";
+import Card from "./ui/Card";
+import { Select } from "./ui/Buttons";
 
 const companies = [
-  { symbol: "AAPL", name: "Apple", logo: "simple-icons:apple" },
-  { symbol: "MSFT", name: "Microsoft", logo: "logos:microsoft-icon" },
-  { symbol: "GOOGL", name: "logos:google-icon" },
-  { symbol: "AMZN", name: "fontisto:amazon" },
-  { symbol: "META", name: "logos:meta-icon" },
+  { symbol: "AAPL", name: "Apple" },
+  { symbol: "MSFT", name: "Microsoft" },
+  { symbol: "GOOGL", name: "Google" },
+  { symbol: "AMZN", name: "Amazon" },
+  { symbol: "META", name: "Meta" },
 ];
 
 const intervals = ["1min", "5min", "15min", "30min", "1h"];
@@ -18,7 +19,7 @@ const Chart = () => {
   const [data, setData] = useState([]);
   const [selectedCompany, setSelectedCompany] = useState(companies[0]);
   const [selectedInterval, setSelectedInterval] = useState("1min");
-  const [companyInfo, setCompanyInfo] = useState(null);
+  // const [companyInfo, setCompanyInfo] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,10 +44,10 @@ const Chart = () => {
             .reverse();
 
           setData(formattedData);
-          const lastClose = formattedData[formattedData.length - 1].close;
-          const prevClose = formattedData[formattedData.length - 2].close;
-          const change = ((lastClose - prevClose) / prevClose) * 100;
-          setCompanyInfo({ lastClose, change });
+          // const lastClose = formattedData[formattedData.length - 1].close;
+          // const prevClose = formattedData[formattedData.length - 2].close;
+          // const change = ((lastClose - prevClose) / prevClose) * 100;
+          // setCompanyInfo({ lastClose, change });
         }
       } catch (error) {
         console.error("Error fetching stock data:", error);
@@ -58,32 +59,113 @@ const Chart = () => {
   useEffect(() => {
     if (!data.length) return;
 
-    const chart = createChart(chartRef.current, {
-      width: chartRef.current.clientWidth || 800,
-      height: 350,
-      layout: {
-        background: { color: "transparent" },
-        textColor: "var(--text-primary)",
-      },
+    // Function to create/update the chart
+    const updateChart = () => {
+      const rootStyles = getComputedStyle(document.documentElement);
+      const primaryTextRGB = rootStyles
+        .getPropertyValue("--primary-text")
+        .trim();
+      const textColor = primaryTextRGB ? `rgb(${primaryTextRGB})` : "#ffffff"; // Convert RGB values to proper format
+
+      // Create Chart
+      const chart = createChart(chartRef.current, {
+        width: chartRef.current.clientWidth || 800,
+        height: 350,
+        layout: {
+          background: { color: "transparent" },
+          textColor: textColor, // Correctly formatted dynamic text color
+        },
+        grid: {
+          vertLines: { color: "rgba(137, 87, 255, 0.2)" },
+          horzLines: { color: "rgba(137, 87, 255, 0.2)" },
+        },
+      });
+
+      // Candlestick Series with Dynamic Colors
+      const candlestickSeries = chart.addCandlestickSeries({
+        upColor: "#8957FF",
+        downColor: "#FFD700",
+        borderUpColor: "#8957FF",
+        borderDownColor: "#FFD700",
+        wickUpColor: "#8957FF",
+        wickDownColor: "#FFD700",
+      });
+
+      candlestickSeries.setData(data);
+      return chart;
+    };
+
+    let chart = updateChart();
+
+    // Observe theme changes and update chart
+    const observer = new MutationObserver(() => {
+      chart.remove();
+      chart = updateChart();
     });
 
-    const candlestickSeries = chart.addCandlestickSeries();
-    candlestickSeries.setData(data);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"], // Detects theme switch
+    });
 
-    return () => chart.remove();
+    return () => {
+      observer.disconnect();
+      chart.remove();
+    };
   }, [data]);
 
   return (
-    <Card className="p-4 bg-base-200 shadow-lg rounded-xl">
+    <Card>
       {/* Header Section */}
-      <div className="flex justify-between items-center border-b border-secondary pb-3">
+      <div className="flex justify-between items-center border-b-1 border-dashed border-[#8957FF]/50 pb-3">
         <div className="flex items-center gap-3">
           <Icon icon={selectedCompany.logo} className="text-5xl text-primary" />
           <h3 className="text-xl font-semibold text-base-content">
             {selectedCompany.name}
           </h3>
         </div>
-        <div className="text-right text-sm text-text-base-content">
+
+        {/* Time Interval Dropdown */}
+        <Select
+          options={[
+            { value: "5m", label: "5 Minutes" },
+            { value: "1h", label: "1 Hour" },
+            { value: "5h", label: "5 Hours" },
+            { value: "1d", label: "1 Day" },
+            { value: "1w", label: "1 Week" },
+          ]}
+          value={selectedInterval}
+          onChange={(e) => setSelectedInterval(e.target.value)}
+          className="text-sm"
+        />
+      </div>
+
+      {/* Company Select Dropdown */}
+      <Select
+        options={companies.map((company) => ({
+          value: company.symbol,
+          label: company.name,
+        }))}
+        value={selectedCompany.symbol}
+        onChange={(e) => {
+          const company = companies.find((c) => c.symbol === e.target.value);
+          setSelectedCompany(company);
+        }}
+        className="w-full mt-5 text-sm"
+      />
+
+      {/* Chart Container */}
+      <div className="relative mt-5 w-full h-[350px] overflow-hidden bg-card">
+        <div ref={chartRef} className="absolute inset-0" />
+      </div>
+    </Card>
+  );
+};
+
+export default Chart;
+
+{
+  /* <div className="text-right text-sm text-text-base-content">
           {companyInfo ? (
             <>
               <p>
@@ -110,51 +192,5 @@ const Chart = () => {
           ) : (
             <p>Loading...</p>
           )}
-        </div>
-      </div>
-
-      {/* Controls Section */}
-      <div className="flex flex-col md:flex-row justify-between items-center mt-4 gap-3">
-        {/* Company Select Dropdown */}
-        <select
-          className="select select-bordered w-full md:w-52 text-sm bg-primary text-base-content"
-          onChange={(e) => {
-            const company = companies.find((c) => c.symbol === e.target.value);
-            setSelectedCompany(company);
-          }}
-          value={selectedCompany.symbol}
-        >
-          {companies.map((company) => (
-            <option key={company.symbol} value={company.symbol}>
-              {company.name}
-            </option>
-          ))}
-        </select>
-
-        {/* Interval Buttons */}
-        <div className="flex flex-wrap gap-2">
-          {intervals.map((interval) => (
-            <button
-              key={interval}
-              onClick={() => setSelectedInterval(interval)}
-              className={`btn btn-sm ${
-                selectedInterval === interval
-                  ? "btn-primary"
-                  : "btn-outline btn-primary"
-              }`}
-            >
-              {interval}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Chart Container */}
-      <div className="relative mt-5 w-full h-[350px] overflow-hidden rounded-lg bg-base-100 shadow-md">
-        <div ref={chartRef} className="absolute inset-0" />
-      </div>
-    </Card>
-  );
-};
-
-export default Chart;
+        </div> */
+}

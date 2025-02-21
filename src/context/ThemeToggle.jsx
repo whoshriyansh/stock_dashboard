@@ -1,32 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Sun, Moon } from "@phosphor-icons/react"; // Import Phosphor icons
+import { Button } from "../components/ui/Buttons";
 
 function ThemeToggle() {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
-  const handleThemeChange = (e) => {
-    setTheme(e.target.value);
-    document.documentElement.setAttribute("data-theme", e.target.value);
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
 
   return (
-    <div className="flex flex-col items-center justify-center bg-base-100 text-base-content">
-      <select
-        className="select select-primary text-sm"
-        value={theme}
-        onChange={handleThemeChange}
-      >
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
-        <option value="cupcake">Cupcake</option>
-        <option value="bumblebee">Bumblebee</option>
-        <option value="emerald">Emerald</option>
-        <option value="corporate">Corporate</option>
-        <option value="synthwave">Synthwave</option>
-        <option value="retro">Retro</option>
-        <option value="cyberpunk">Cyberpunk</option>
-        <option value="valentine">Valentine</option>
-      </select>
-    </div>
+    <Button variant="pur_border" onClick={toggleTheme}>
+      {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
+    </Button>
   );
 }
 

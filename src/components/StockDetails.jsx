@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { fetchStockDetails } from "../service/stock-api";
+import { Button } from "./ui/Buttons";
 
 const StockDetails = ({ stockSymbol }) => {
   const [stockData, setStockData] = useState(null);
@@ -32,28 +33,29 @@ const StockDetails = ({ stockSymbol }) => {
       </div>
 
       <div className="flex flex-col space-y-4 mt-2">
-        <p className="text-sm flex justify-between border-b-1 border-primary/50 py-1">
+        <p className="text-sm flex justify-between border-b-1 border-[#8957FF]/30 border-dashed py-1">
           <strong>Country:</strong> {stockData.country}
         </p>
-        <p className="text-sm flex justify-between border-b-1 border-primary/50 py-1">
+        <p className="text-sm flex justify-between border-b-1 border-[#8957FF]/30 border-dashed py-1">
           <strong>Currency:</strong> {stockData.currency}
         </p>
-        <p className="text-sm flex justify-between border-b-1 border-primary/50 py-1">
+        <p className="text-sm flex justify-between border-b-1 border-[#8957FF]/30 border-dashed py-1">
           <strong>Phone No:</strong> {stockData.phone}
         </p>
-        <p className="text-sm flex justify-between border-b-1 border-primary/50 py-1">
+        <p className="text-sm flex justify-between border-b-1 border-[#8957FF]/30 border-dashed py-1">
           <strong>Ticker:</strong> {stockData.ticker}
         </p>
-        <p className="text-sm flex justify-between border-b-1 border-primary/50 py-1">
+        <p className="text-sm flex justify-between border-b-1 border-[#8957FF]/30 border-dashed py-1">
           <strong>Exchange:</strong> {stockData.exchange}
         </p>
-        <p className="text-sm flex justify-between border-b-1 border-primary/50 py-1">
+        <p className="text-sm flex justify-between border-b-1 border-[#8957FF]/30 border-dashed py-1">
           <strong>Market Cap:</strong> ${stockData.marketCapitalization}B
         </p>
-        <p className="text-sm flex justify-between border-b-1 border-primary/50 py-1">
+        <p className="text-sm flex justify-between border-b-1 border-[#8957FF]/30 border-dashed py-1">
           <strong>IPO Date:</strong> {stockData.ipo}
         </p>
-        <div className="flex justify-center">
+
+        <Button variant="pur_border">
           <a
             href={stockData.weburl}
             target="_blank"
@@ -62,7 +64,7 @@ const StockDetails = ({ stockSymbol }) => {
           >
             Visit Company Website
           </a>
-        </div>
+        </Button>
       </div>
     </div>
   );

@@ -18,9 +18,9 @@ const Modal = ({ isOpen, handleClose, children }) => {
 
   return createPortal(
     <div className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex justify-center items-center">
-      <div className="bg-base-100 px-4 py-5 rounded-lg shadow-lg text-base-content relative w-2/5 lg:w-1/4">
+      <div className="bg-card px-4 py-5 rounded-lg shadow-lg text-base-content relative w-3/4 md:w-2/5 lg:w-1/4 text-primary-text">
         <button
-          className="absolute right-2 top-2  text-white rounded"
+          className="absolute right-2 top-2  text-primary-text rounded"
           onClick={handleClose}
         >
           <X size={26} weight="bold" className="text-base-content" />

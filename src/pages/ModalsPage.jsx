@@ -1,4 +1,3 @@
-// src/pages/Modals.jsx
 import React from "react";
 import { useModal } from "../context/ModalContext";
 import {
@@ -10,22 +9,23 @@ import {
   AddedToGroupModal,
   SignupLoginModal,
 } from "../components/modal/AllModals";
+import { Button } from "../components/ui/Buttons";
 
 const Modals = () => {
   const { openModal } = useModal();
 
   return (
-    <div className="p-4 space-y-10 w-full lg:w-1/2">
+    <div className="px-2 md:px-4 py-4 md:py-2 space-y-10 w-full lg:w-1/2 bg-background text-primary-text">
       <div>
         <h1 className="text-5xl font-bold"> Modal Showcase</h1>
         <p className=" text-base-content">
-          Click on any button below to preview different types of modals in
+          Click on any Button below to preview different types of modals in
           action. These modals serve various purposes, from confirmations to
           user interactions.
         </p>
       </div>
 
-      <div className="bg-base-200 py-6 px-4 rounded-xl">
+      <div className="bg-card py-6 px-4 rounded-xl">
         <div>
           <h3>Confirmation & Warning Modals</h3>
           <p>
@@ -34,8 +34,9 @@ const Modals = () => {
             content.
           </p>
         </div>
-        <div className="py-10 px-10 bg-base-300 flex gap-5 items-center justify-center rounded-md mt-5">
-          <button
+        <div className="md:p-10 bg-base-300 flex gap-5 items-center justify-center rounded-md mt-5">
+          <Button
+            variant="pur_border"
             className="btn btn-primary btn-sm font-normal"
             onClick={() =>
               openModal(
@@ -45,9 +46,9 @@ const Modals = () => {
             }
           >
             Confirmation Modal
-          </button>
-          <button
-            className="btn btn-warning btn-sm font-normal"
+          </Button>
+          <Button
+            variant="warning"
             onClick={() =>
               openModal(
                 "unsavedChanges",
@@ -56,20 +57,21 @@ const Modals = () => {
             }
           >
             Unsaved Changes
-          </button>
+          </Button>
 
-          <button
+          <Button
+            variant="error"
             className="btn btn-error btn-sm font-normal"
             onClick={() =>
               openModal("deletePost", <DeletePostModal openModal={openModal} />)
             }
           >
             Delete Post
-          </button>
+          </Button>
         </div>
       </div>
 
-      <div className="bg-base-200 py-6 px-4 rounded-xl">
+      <div className="bg-card py-6 px-4 rounded-xl">
         <div>
           <h3>Access & Collaboration Modals</h3>
           <p>
@@ -77,9 +79,9 @@ const Modals = () => {
             inviting collaborators, or notifying users about group additions.
           </p>
         </div>
-        <div className="py-10 px-10 bg-base-300 flex gap-5 items-center justify-center rounded-md  mt-5">
-          <button
-            className="btn btn-primary  btn-sm font-normal"
+        <div className="md:p-10 flex gap-5 items-center justify-center rounded-md  mt-5">
+          <Button
+            variant="purple"
             onClick={() =>
               openModal(
                 "requestAccess",
@@ -88,10 +90,10 @@ const Modals = () => {
             }
           >
             Request Access
-          </button>
+          </Button>
 
-          <button
-            className="btn btn-info  btn-sm font-normal"
+          <Button
+            variant="purple"
             onClick={() =>
               openModal(
                 "inviteCollaborators",
@@ -100,10 +102,10 @@ const Modals = () => {
             }
           >
             Invite Collaborators
-          </button>
+          </Button>
 
-          <button
-            className="btn btn-success btn-sm font-normal"
+          <Button
+            variant="purple"
             onClick={() =>
               openModal(
                 "addedToGroup",
@@ -112,11 +114,11 @@ const Modals = () => {
             }
           >
             Added to Group
-          </button>
+          </Button>
         </div>
       </div>
 
-      <div className="bg-base-200 py-6 px-4 rounded-xl">
+      <div className="bg-card py-6 px-4 rounded-xl">
         <div>
           <h3>Authentication Modal</h3>
           <p>
@@ -125,8 +127,8 @@ const Modals = () => {
           </p>
         </div>
         <div className="py-10 px-10 bg-base-300 flex gap-5 items-center justify-center rounded-md  mt-5">
-          <button
-            className="btn btn-accent btn-sm font-normal"
+          <Button
+            variant="pur_text"
             onClick={() =>
               openModal(
                 "signupLogin",
@@ -134,8 +136,8 @@ const Modals = () => {
               )
             }
           >
-            Signup
-          </button>
+            Signup Modal
+          </Button>
         </div>
       </div>
     </div>

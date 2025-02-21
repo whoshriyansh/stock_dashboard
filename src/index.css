@@ -10,29 +10,36 @@
   box-sizing: border-box;
 }
 
+/* Light Mode (Default) */
 :root {
-  font-family: "Roboto", serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --background: 248, 246, 255;
+  --card: 255, 255, 255;
+  --primary-purple: 137, 87, 255;
+  --primary-yellow: 251, 199, 105;
+  --primary-red: 251, 129, 129;
+  --primary-green: 30, 171, 146;
+  --primary-text: 35, 38, 43;
+  --secondary-text: 29, 30, 36;
 }
 
-@layer components {
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 4px;
-  }
+/* Dark Mode */
+html[data-theme="dark"] {
+  --background: 35, 38, 43;
+  --card: 29, 30, 36;
+  --primary-purple: 137, 87, 255;
+  --primary-yellow: 251, 199, 105;
+  --primary-red: 251, 129, 129;
+  --primary-green: 30, 171, 146;
+  --primary-text: 248, 246, 255;
+  --secondary-text: 255, 255, 255;
+}
 
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: transparent;
-  }
+/* Smooth Transition */
+html {
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
 
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background-color: #121212;
-    width: 5px;
-    border-radius: 10px;
-  }
+/* Apply Theme Variables */
+body {
+  background-color: rgb(var(--background));
 }

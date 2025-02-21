@@ -12,11 +12,12 @@ import {
   Crown,
 } from "@phosphor-icons/react";
 import React from "react";
+import { Button } from "../ui/Buttons";
 
 export const ConfirmationModal = ({ openModal }) => (
   <div className="flex flex-col items-start w-full">
-    <div className="bg-success text-success-content p-2 rounded-full">
-      <Check size={26} weight="bold" />
+    <div className="bg-primary-green text-success-content p-2 rounded-full">
+      <Check size={24} />
     </div>
     <h2 className="text-xl font-bold mt-4">Blog post published</h2>
     <p className="text-base-content mt-2">
@@ -24,63 +25,72 @@ export const ConfirmationModal = ({ openModal }) => (
       post and republish changes.
     </p>
     <div className="mt-6 flex justify-between w-full gap-2">
-      <button
+      <Button
+        variant="error"
         className="btn btn-outline w-1/2"
         onClick={() => openModal("", null)}
       >
         Cancel
-      </button>
-      <button className="btn btn-primary w-1/2">Confirm</button>
+      </Button>
+      <Button variant="purple" className="btn btn-primary w-1/2">
+        Confirm
+      </Button>
     </div>
   </div>
 );
 
 export const UnsaveChangesModal = ({ openModal }) => (
   <div className="flex flex-col items-start w-full">
-    <div className="bg-warning text-warning-content p-2 rounded-full">
-      <WarningCircle size={26} weight="bold" />
+    <div className="bg-primary-yellow text-black p-2 rounded-full">
+      <WarningCircle size={24} />
     </div>
     <h2 className="text-xl font-bold mt-4">Unsaved Changes</h2>
     <p className="text-base-content mt-2">
       You have unsaved changes. If you leave now, your changes will be lost.
     </p>
     <div className="mt-6 flex justify-between w-full gap-2">
-      <button
+      <Button
+        variant="error"
         className="btn btn-outline w-1/2"
         onClick={() => openModal("", null)}
       >
         Cancel
-      </button>
-      <button className="btn btn-warning w-1/2">Leave</button>
+      </Button>
+      <Button variant="purple" className="btn btn-warning w-1/2">
+        Leave
+      </Button>
     </div>
   </div>
 );
 
 export const DeletePostModal = ({ openModal }) => (
   <div className="flex flex-col items-start w-full">
-    <div className="bg-error text-error-content p-2 rounded-full">
-      <Trash size={26} weight="bold" />
+    <div className="bg-primary-red text-black p-2 rounded-full">
+      <Trash size={24} />
     </div>
     <h2 className="text-xl font-bold mt-4">Delete Post</h2>
     <p className="text-base-content mt-2">
       Are you sure you want to delete this post? This action cannot be undone.
     </p>
     <div className="mt-6 flex justify-between w-full gap-2">
-      <button
+      <Button
+        variant="error"
         className="btn btn-outline w-1/2"
         onClick={() => openModal("", null)}
       >
         Cancel
-      </button>
-      <button className="btn btn-error w-1/2">Delete</button>
+      </Button>
+      <Button variant="purple" className="btn btn-error w-1/2">
+        Delete
+      </Button>
     </div>
   </div>
 );
 
 export const RequestAccessModal = ({ openModal }) => (
   <div className="flex flex-col items-start w-full">
-    <div className="bg-primary text-primary-content p-2 rounded-full">
-      <Key size={26} weight="bold" />
+    <div className="bg-primary-purple text-primary-content p-2 rounded-full">
+      <Key size={24} />
     </div>
     <h2 className="text-xl font-bold mt-4">Request Access</h2>
     <p className="text-base-content mt-2">
@@ -88,21 +98,24 @@ export const RequestAccessModal = ({ openModal }) => (
       access.
     </p>
     <div className="mt-6 flex justify-between w-full gap-2">
-      <button
+      <Button
+        variant="error"
         className="btn btn-outline w-1/2"
         onClick={() => openModal("", null)}
       >
         Cancel
-      </button>
-      <button className="btn btn-primary w-1/2">Request</button>
+      </Button>
+      <Button variant="purple" className="btn btn-primary w-1/2">
+        Request
+      </Button>
     </div>
   </div>
 );
 
 export const InviteCollaboratorsModal = ({ openModal }) => (
   <div className="flex flex-col items-start w-full">
-    <div className="bg-info text-info-content p-2 rounded-full">
-      <UsersThree size={26} weight="bold" />
+    <div className="bg-primary-purple text-info-content p-2 rounded-full">
+      <UsersThree size={24} />
     </div>
     <h2 className="text-xl font-bold mt-4">Invite Collaborators</h2>
     <p className="text-base-content mt-2">
@@ -114,32 +127,36 @@ export const InviteCollaboratorsModal = ({ openModal }) => (
       className="w-full mt-2 p-2 border rounded input input-bordered"
     />
     <div className="mt-6 flex justify-between w-full gap-2">
-      <button
+      <Button
+        variant="error"
         className="btn btn-outline w-1/2"
         onClick={() => openModal("", null)}
       >
         Cancel
-      </button>
-      <button className="btn btn-info w-1/2">Send Invite</button>
+      </Button>
+      <Button variant="purple" className="btn btn-info w-1/2">
+        Send Invite
+      </Button>
     </div>
   </div>
 );
 
 export const AddedToGroupModal = ({ openModal }) => (
   <div className="flex flex-col items-start w-full">
-    <div className="bg-success text-success-content p-2 rounded-full">
-      <UserCheck size={26} weight="bold" />
+    <div className="bg-primary-purple text-success-content p-2 rounded-full">
+      <UserCheck size={24} />
     </div>
     <h2 className="text-xl font-bold mt-4">You Have Been Added!</h2>
     <p className="text-base-content mt-2">
       You have successfully been added to the group. Start collaborating now.
     </p>
-    <button
+    <Button
+      variant="purple"
       className="mt-6 btn btn-success w-full"
       onClick={() => openModal("", null)}
     >
       Got It
-    </button>
+    </Button>
   </div>
 );
 
@@ -163,17 +180,17 @@ export const SignupLoginModal = ({ openModal }) => (
       className="input input-bordered w-full mt-2"
     />
     <div className="mt-6 flex flex-col w-full gap-2">
-      <button className="btn btn-primary w-full">Continue</button>
-      <button className="btn btn-outline w-full flex gap-2 justify-center items-center">
+      <Button variant="purple" className="btn btn-primary w-full">
+        Continue
+      </Button>
+      <span className="text-center text-xs font-semibold">OR</span>
+      <Button
+        variant="purple"
+        className="btn btn-outline w-full flex gap-2 justify-center items-center"
+      >
         <GoogleLogo size={20} /> Continue with Google
-      </button>
+      </Button>
     </div>
-    <button
-      className="mt-6 text-sm text-gray-500"
-      onClick={() => openModal("", null)}
-    >
-      Cancel
-    </button>
   </div>
 );
 
@@ -192,13 +209,16 @@ export const LoginModal = ({ openModal }) => (
       className="input input-bordered w-full mt-2"
     />
     <div className="mt-6 flex flex-col w-full gap-2">
-      <button className="btn btn-primary w-full">Login</button>
-      <button
+      <Button variant="purple" className="btn btn-primary w-full">
+        Login
+      </Button>
+      <Button
+        variant="error"
         className="btn btn-outline w-full"
         onClick={() => openModal("", null)}
       >
         Cancel
-      </button>
+      </Button>
     </div>
   </div>
 );
@@ -207,15 +227,16 @@ export const LoginModal = ({ openModal }) => (
 export const GoogleLoginModal = ({ openModal }) => (
   <div className="flex flex-col items-center w-full text-center">
     <h2 className="text-xl font-bold">Continue with Google</h2>
-    <button className="btn btn-outline w-full flex gap-2 justify-center items-center mt-6">
+    <Button className="btn btn-outline w-full flex gap-2 justify-center items-center mt-6">
       <GoogleLogo size={20} /> Sign in with Google
-    </button>
-    <button
+    </Button>
+    <Button
+      variant="error"
       className="mt-6 text-sm text-gray-500"
       onClick={() => openModal("", null)}
     >
       Cancel
-    </button>
+    </Button>
   </div>
 );
 
@@ -233,13 +254,14 @@ export const OtpModal = ({ openModal }) => (
       className="input input-bordered w-full mt-4 text-center text-2xl"
     />
     <div className="mt-6 flex justify-between w-full gap-2">
-      <button
+      <Button
+        variant="error"
         className="btn btn-outline w-1/2"
         onClick={() => openModal("", null)}
       >
         Cancel
-      </button>
-      <button className="btn btn-primary w-1/2">Verify</button>
+      </Button>
+      <Button className="btn btn-primary w-1/2">Verify</Button>
     </div>
   </div>
 );
@@ -248,7 +270,7 @@ export const OtpModal = ({ openModal }) => (
 export const CreditCardModal = ({ openModal }) => (
   <div className="flex flex-col items-start w-full">
     <div className="bg-primary text-primary-content p-2 rounded-full">
-      <CreditCard size={26} weight="bold" />
+      <CreditCard size={24} />
     </div>
     <h2 className="text-xl font-bold mt-4">Enter Payment Details</h2>
     <input
@@ -268,13 +290,14 @@ export const CreditCardModal = ({ openModal }) => (
         className="input input-bordered w-1/2"
       />
     </div>
-    <button className="btn btn-primary w-full mt-6">Pay Now</button>
-    <button
+    <Button className="btn btn-primary w-full mt-6">Pay Now</Button>
+    <Button
+      variant="error"
       className="mt-6 text-sm text-gray-500"
       onClick={() => openModal("", null)}
     >
       Cancel
-    </button>
+    </Button>
   </div>
 );
 
@@ -287,26 +310,26 @@ export const SelectPlanModal = ({ openModal }) => (
         <ShieldCheck size={32} className="mx-auto text-primary" />
         <h3 className="text-lg font-bold mt-2">Basic</h3>
         <p className="text-sm mt-1">$10 / month</p>
-        <button className="btn btn-primary w-full mt-4">Select</button>
+        <Button className="btn btn-primary w-full mt-4">Select</Button>
       </div>
       <div className="p-4 border rounded-lg text-center">
         <Crown size={32} className="mx-auto text-warning" />
         <h3 className="text-lg font-bold mt-2">Pro</h3>
         <p className="text-sm mt-1">$20 / month</p>
-        <button className="btn btn-warning w-full mt-4">Select</button>
+        <Button className="btn btn-warning w-full mt-4">Select</Button>
       </div>
       <div className="p-4 border rounded-lg text-center">
         <ShieldCheck size={32} className="mx-auto text-success" />
         <h3 className="text-lg font-bold mt-2">Enterprise</h3>
         <p className="text-sm mt-1">$50 / month</p>
-        <button className="btn btn-success w-full mt-4">Select</button>
+        <Button className="btn btn-success w-full mt-4">Select</Button>
       </div>
     </div>
-    <button
+    <Button
       className="mt-6 text-sm text-gray-500"
       onClick={() => openModal("", null)}
     >
       Cancel
-    </button>
+    </Button>
   </div>
 );

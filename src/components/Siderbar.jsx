@@ -15,7 +15,10 @@ const navItems = [
   {
     name: "Dashboard",
     icon: <BookmarkSimple size={24} />,
-    subMenu: [{ name: "Default", to: "/" }],
+    subMenu: [
+      { name: "Default", to: "/" },
+      { name: "Analytics", to: "/analytics" },
+    ],
   },
   {
     name: "Components",

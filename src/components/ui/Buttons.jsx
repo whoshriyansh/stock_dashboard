@@ -11,7 +11,7 @@ export const Button = ({
     pur_border:
       "bg-primary-transparent border-1 border-[#8957FF]/50 hover:bg-primary-purple hover:text-white",
     success:
-      "bg-primary-transparent border-1 border-[#8957FF]/50 hover:bg-primary-purple hover:text-white",
+      "bg-primary-transparent border-1 border-[#1EAB92]/50 hover:bg-primary-purple hover:text-white",
     warning:
       "bg-primary-transparent border-1 border-[#FFD700]/50 hover:bg-primary-yellow hover:text-black",
     error:

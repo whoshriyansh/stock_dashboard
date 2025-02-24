@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard";
 import ModalsPage from "./pages/ModalsPage";
 import { ModalProvider } from "./context/ModalContext";
 import InputFields from "./pages/InputFields";
+import AnalyticsPage from "./pages/AnalyticsPage";
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Dashboard />} />
+            <Route path="/analytics" element={<AnalyticsPage />} />
             <Route path="/modals" element={<ModalsPage />} />
             <Route path="/input-field" element={<InputFields />} />
           </Route>

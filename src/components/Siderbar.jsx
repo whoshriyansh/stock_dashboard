@@ -7,9 +7,11 @@ import {
   ArrowCircleLeft,
   CaretDown,
   CaretUp,
+  Storefront,
 } from "@phosphor-icons/react";
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import logo from "../assets/stockin.png";
 
 const navItems = [
   {
@@ -18,6 +20,15 @@ const navItems = [
     subMenu: [
       { name: "Default", to: "/" },
       { name: "Analytics", to: "/analytics" },
+    ],
+  },
+  {
+    name: "E-Commerce",
+    icon: <Storefront size={24} />,
+    subMenu: [
+      { name: "Customers", to: "/customer-list" },
+      { name: "Orders", to: "/order-list" },
+      { name: "Invoices", to: "/invoice-list" },
     ],
   },
   {
@@ -37,14 +48,14 @@ const navItems = [
       { name: "Reset Password", to: "/reset-password" },
     ],
   },
-  {
-    name: "Others",
-    icon: <SquaresFour size={24} />,
-    subMenu: [
-      { name: "Support", to: "/support" },
-      { name: "FAQ", to: "/faq" },
-    ],
-  },
+  // {
+  //   name: "Others",
+  //   icon: <SquaresFour size={24} />,
+  //   subMenu: [
+  //     { name: "SignUp", to: "/signup" },
+  //     { name: "SignIn", to: "/signin" },
+  //   ],
+  // },
 ];
 
 const Sidebar = ({ isOpen, closeSidebar }) => {
@@ -63,7 +74,7 @@ const Sidebar = ({ isOpen, closeSidebar }) => {
       {/* Sidebar Header */}
       <div className="flex items-center justify-between text-2xl font-semibold mb-6 border-b-1 border-dashed border-primary-purple py-2">
         <div className="flex items-center gap-2 lg:hidden text-primary-purple">
-          <Diamond size={32} weight="bold" />
+          <img src={logo} alt="" className="h-8" />
           Stockin
         </div>
         <button onClick={closeSidebar} className="lg:hidden">

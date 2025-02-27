@@ -1,15 +1,8 @@
 import React, { useState } from "react";
-import {
-  Eye,
-  EyeSlash,
-  CheckCircle,
-  ExclamationMark,
-  Password,
-} from "@phosphor-icons/react";
+import { Password } from "@phosphor-icons/react";
 import { InputField } from "../components/ui/Input";
 
 const InputFields = () => {
-  const [passwordVisible, setPasswordVisible] = useState(false);
   const [text, setText] = useState("");
   const [characterCount, setCharacterCount] = useState("");
   const [error, setError] = useState(false);

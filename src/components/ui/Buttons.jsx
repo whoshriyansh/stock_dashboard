@@ -42,7 +42,7 @@ export const Select = ({
 
   return (
     <select
-      className={`${baseStyles} bg-transparent border border-[#8957FF]/30 hover:bg-primary-purple hover:text-white focus:ring-[#8957FF] ${className} appearance-none`}
+      className={`${baseStyles} bg-primary-purple border border-[#8957FF]/30 hover:bg-primary-purple hover:text-white focus:ring-[#8957FF] ${className} appearance-none`}
       value={value}
       onChange={onChange}
       {...props}
